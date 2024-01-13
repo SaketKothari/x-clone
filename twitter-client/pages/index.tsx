@@ -1,10 +1,9 @@
-import { BiHash, BiHomeCircle, BiUser } from 'react-icons/bi';
+import { BiHash, BiHomeCircle, BiMoney, BiUser } from 'react-icons/bi';
 import { BsBell, BsBookmark, BsEnvelope } from 'react-icons/bs';
 import { FaXTwitter } from 'react-icons/fa6';
+import { SlOptions } from 'react-icons/sl';
 
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import FeedCard from '@/components/FeedCard';
 
 interface TwitterSidebarButton {
   title: string;
@@ -33,43 +32,55 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
     icon: <BsBookmark />,
   },
   {
+    title: 'Twitter Blue',
+    icon: <BiMoney />,
+  },
+  {
     title: 'Profile',
     icon: <BiUser />,
+  },
+  {
+    title: 'More',
+    icon: <SlOptions />,
   },
 ];
 
 export default function Home() {
   return (
-    <div className={inter.className}>
+    <>
       <div className="grid grid-cols-12 h-screen w-screen px-56">
-        <div className="col-span-3 pt-8 px-4">
-          <div className="text-4xl h-fit w-fit hover:bg-gray-800 rounded-full p-4 cursor-pointer transition-all mt-2">
+        <div className="col-span-3 pt-1 px-4 ml-10">
+          <div className="text-2xl h-fit w-fit hover:bg-gray-800 rounded-full p-4 cursor-pointer transition-all mt-2">
             <FaXTwitter />
           </div>
 
           {/* Sidebar Items */}
-          <div className="mt-6 text-2xl pr-4">
+          <div className="mt-1 text-xl pr-4">
             <ul>
               {sidebarMenuItems.map((item) => (
                 <li
-                  className="flex justify-start items-center gap-3 hover:bg-gray-800 rounded-full px-5 py-2 w-fit cursor-pointer"
+                  className="flex justify-start items-center gap-3 hover:bg-gray-800 rounded-full px-3 py-3 w-fit cursor-pointer"
                   key={item.title}
                 >
-                  <span>{item.icon}</span>
+                  <span className="text-2xl">{item.icon}</span>
                   <span>{item.title}</span>
                 </li>
               ))}
             </ul>
             <div className="mt-5 px-3">
-              <button className="bg-[#1d9bf0] font-semibold p-4 rounded-full text-lg w-full">
+              <button className="bg-[#1d9bf0] font-semibold px-2 py-4 rounded-full text-lg w-full">
                 Tweet
               </button>
             </div>
           </div>
         </div>
-        <div className="col-span-6 border-r-[1px] border-l-[1px] border-gray-400"></div>
+        <div className="col-span-5 border-r-[1px] border-l-[1px] border-gray-600">
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+        </div>
         <div className="col-span-3"></div>
       </div>
-    </div>
+    </>
   );
 }
